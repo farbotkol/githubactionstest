@@ -1,3 +1,4 @@
+name: Manual Run it
  on:
   workflow_dispatch:
     inputs:
