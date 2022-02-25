@@ -1,32 +1,32 @@
 name: Manual Run it
- on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning' 
-        type: choice
-        options:
-        - info
-        - warning
-        - debug 
-      tags:
-        description: 'Test scenario tags'
-        required: false 
-        type: boolean
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true 
+on:
+ workflow_dispatch:
+   inputs:
+     logLevel:
+       description: 'Log level'
+       required: true
+       default: 'warning' 
+       type: choice
+       options:
+       - info
+       - warning
+       - debug 
+     tags:
+       description: 'Test scenario tags'
+       required: false 
+       type: boolean
+     environment:
+       description: 'Environment to run tests against'
+       type: environment
+       required: true 
 
 jobs:
-  print-tag:
-    runs-on: ubuntu-latest
+ print-tag:
+   runs-on: ubuntu-latest
 
-    steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tag is ${{ github.event.inputs.tag }} 
+   steps:
+     - name: Print the input tag to STDOUT
+       run: echo  The tag is ${{ github.event.inputs.tag }} 
 Defining inputs, outputs, and secrets for reusable workflows
 You can define inputs and secrets that a reusable workflow should receive from a calling workflow. You can also specify outputs that a reusable workflow will make available to a calling workflow. For more information, see "Reusing workflows."
 
@@ -39,10 +39,10 @@ Reference the webhook event documentation for common properties and example payl
 You can also print the entire github.event context to see what properties are available for the event that triggered your workflow:
 
 jobs:
-  print_context:
-    runs-on: ubuntu-latest
-    steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
+ print_context:
+   runs-on: ubuntu-latest
+   steps:
+     - env:
+         EVENT_CONTEXT: ${{ toJSON(github.event) }}
+       run: |
+         echo $EVENT_CONTEXT
