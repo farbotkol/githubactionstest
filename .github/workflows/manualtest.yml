@@ -17,7 +17,7 @@ on:
        type: boolean
      environment:
        description: 'Environment to run tests against1'
-       type: environment
+       type: choice
        required: true 
        options:
        - Prod
