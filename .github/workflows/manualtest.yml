@@ -19,6 +19,11 @@ on:
        description: 'Environment to run tests against1'
        type: environment
        required: true 
+       options:
+       - Prod
+       - UAT
+       - QA
+       - Dev
 
 jobs:
  print-tag:
