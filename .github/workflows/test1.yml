@@ -36,9 +36,9 @@ jobs:
           echo "Running on pr: ${{ steps.branch-name.outputs.current_branch }}"
           echo "Running on head_ref_branch: ${{ steps.branch-name.outputs.head_ref_branch }}"
           echo "Running on ref_branch: ${{ steps.branch-name.outputs.ref_branch }}"
-          git config remote.origin.fetch ${{ steps.branch-name.outputs.head_ref_branch }}
+          git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
           git fetch --all
-          git checkout -b pr
-          git --no-pager diff --name-status pr origin/main > foo.txt
+          git checkout -b ${{ steps.branch-name.outputs.head_ref_branch }}
+          git --no-pager diff --name-status ${{ steps.branch-name.outputs.head_ref_branch }} origin/main > foo.txt
           cat foo.txt
         
