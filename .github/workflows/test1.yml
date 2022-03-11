@@ -1,1 +1,57 @@
+name: TEST THIS THINK FOR PR
+on: 
+  pull_request:
+      types:
+        - opened
+      branches:
+        - 'main'
+  issue_comment:
+      types:
+        - created
+      branches:
+        - 'main'
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:    
+      - uses: actions/checkout@v2
+      
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v5.1
+        
+      - name: Running on the default branch.
+        if: steps.branch-name.outputs.is_default == 'true'
+        run: |
+          echo "Running on default: ${{ steps.branch-name.outputs.current_branch }}"
+          # Outputs: "Running on default: main".
+          echo "Running on head_ref_branch: ${{ steps.branch-name.outputs.head_ref_branch }}"
+          echo "Running on ref_branch: ${{ steps.branch-name.outputs.ref_branch }}"
+      
+      - name: Running on a pull request branch.
+        if: steps.branch-name.outputs.is_default == 'false'
+        run: |
+          echo "Running on pr: ${{ steps.branch-name.outputs.current_branch }}"
+          echo "Running on head_ref_branch: ${{ steps.branch-name.outputs.head_ref_branch }}"
+          echo "Running on ref_branch: ${{ steps.branch-name.outputs.ref_branch }}"
+        
+        
+        
+        # Outputs: "Running on pr: feature/test".
+      #- name: Dump GitHub context
+       # env:
+        # GITHUB_CONTEXT: ${{ toJson(github) }}
+        #run: |
+        #  echo "$GITHUB_CONTEXT"
+        #  echo ${{ github.event.pull_request.title }}
+        #  echo github.base_ref: ${{ github.base_ref }}
+        #  echo github.head_ref: ${{ github.head_ref }}
+        #  echo github.ref: ${{ github.ref }}
+        # echo remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+        #  git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+        #  git fetch --all
+        #  git checkout -b pr
+        #  git --no-pager diff --name-status pr origin/CXC_QA
+ 
