@@ -39,6 +39,6 @@ jobs:
           git config remote.origin.fetch ${{ steps.branch-name.outputs.head_ref_branch }}
           git fetch --all
           git checkout -b pr
-          git --no-pager diff --name-status pr main > foo.txt
+          git --no-pager diff --name-status pr origin/main > foo.txt
           cat foo.txt
         
