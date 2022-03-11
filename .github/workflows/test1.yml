@@ -36,31 +36,9 @@ jobs:
           echo "Running on pr: ${{ steps.branch-name.outputs.current_branch }}"
           echo "Running on head_ref_branch: ${{ steps.branch-name.outputs.head_ref_branch }}"
           echo "Running on ref_branch: ${{ steps.branch-name.outputs.ref_branch }}"
-          
-          echo github.base_ref: ${{ github.base_ref }}
-          echo github.head_ref: ${{ github.head_ref }}
-          echo github.ref: ${{ github.ref }}
-          
           git config remote.origin.fetch head_ref_branch
           git fetch --all
           git checkout -b pr
-          git --no-pager diff --name-status pr origin/CXC_QA
+          git --no-pager diff --name-status pr origin/main > foo.txt
+          cat foo.txt
         
-        
-        
-        # Outputs: "Running on pr: feature/test".
-      #- name: Dump GitHub context
-       # env:
-        # GITHUB_CONTEXT: ${{ toJson(github) }}
-        #run: |
-        #  echo "$GITHUB_CONTEXT"
-        #  echo ${{ github.event.pull_request.title }}
-        #  echo github.base_ref: ${{ github.base_ref }}
-        #  echo github.head_ref: ${{ github.head_ref }}
-        #  echo github.ref: ${{ github.ref }}
-        # echo remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-        #  git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-        #  git fetch --all
-        #  git checkout -b pr
-        #  git --no-pager diff --name-status pr origin/CXC_QA
- 
